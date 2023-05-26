@@ -1,0 +1,2 @@
+Appointment with ID: 9 for the contact "Anika Costa" has been cancelled on 2023-05-18 19:46:44 UTC.
+Appointment with ID: 1 for the contact "Li Lee" has been cancelled on 2023-05-18 19:46:47 UTC.
