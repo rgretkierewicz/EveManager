@@ -11,7 +11,7 @@ This application is used to schedule consultation appointments for customers. Th
 
 Running the program:
 The application uses MySQL WorkBench 8.0 to run its database. Database_Setup_Instructions.txt provides steps for setting up the database to run the application with. 
-Launch the application from 'Main'. Login with the username 'test' and the password 'test'.
+Use IntelliJ IDEA to open the application files. Launch the application from 'Main'. Login with the username 'test' and the password 'test'.
 
 Skills I used:
 - Creating and utilizing lambda expressions
