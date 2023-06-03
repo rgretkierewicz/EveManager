@@ -20,4 +20,4 @@ Skills I used:
 - Using the Localization & Date/Time API
 - Incorporating resource bundles
 - Advanced exception handling
-- Created an attractive and user friendly GUI
+- Created an attractive and user-friendly GUI
