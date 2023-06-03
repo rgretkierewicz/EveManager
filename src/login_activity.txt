@@ -198,3 +198,8 @@ Successful login by the user: test at 2023-05-24 10:52:40 UTC.
 Successful login by the user: test at 2023-05-24 10:54:04 UTC.
 Successful login by the user: test at 2023-05-24 10:54:56 UTC.
 Successful login by the user: test at 2023-05-24 10:56:40 UTC.
+Successful login by the user: test at 2023-05-26 14:29:34 UTC.
+Successful login by the user: test at 2023-06-01 13:57:45 UTC.
+Successful login by the user: test at 2023-06-01 13:59:14 UTC.
+Successful login by the user: test at 2023-06-01 14:02:50 UTC.
+Successful login by the user: test at 2023-06-01 18:13:03 UTC.

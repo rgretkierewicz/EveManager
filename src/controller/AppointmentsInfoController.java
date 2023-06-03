@@ -69,17 +69,14 @@ public class AppointmentsInfoController implements Initializable {
     private Label noResults;
     private static ObservableList<String> dateTypesList = FXCollections.observableArrayList("All", "By Week", "By Month");
     private static ObservableList<String> venueList = FXCollections.observableArrayList("All", "Remote", "In-Office");
-    String venueSelection = ""; //can remove
-    String dateSelection = "";//can remove
+    String venueSelection = "";
+    String dateSelection = "";
     Stage stage;
     Parent scene;
     DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-    //Temporary values
     Remote remote = new Remote();
     InOffice inOffice = new InOffice();
     Appointments appointments = new Appointments();
-
 
     /**
      * This method changes the scene to the AddAppointment scene.
@@ -194,27 +191,6 @@ public class AppointmentsInfoController implements Initializable {
         }
     }
 
-    /**
-     * This method displays all appointments in the appointmentsTable TableView.
-     *
-     * @param event The All Appointments RadioButton is selected.
-     */
-    @FXML
-    public void onActionAll(ActionEvent event) {
-        appointmentsTable.setItems(Appointments.getAllAppointments());
-    }
-
-    /**
-     * This method displays appointments within one month of the current date in the appointmentsTable TableView.
-     *
-     * @param event The By Month RadioButton is selected.
-     */
-    @FXML
-    public void onActionMonth(ActionEvent event) {
-        LocalDate dateNow = LocalDate.now();
-        //appointmentsTable.setItems(Appointments.selectMonth(dateNow));
-        appointmentsTable.setItems(appointments.selectMonth(dateNow));
-    }
 
     /**
      * This method terminates the application.
@@ -225,17 +201,6 @@ public class AppointmentsInfoController implements Initializable {
         System.exit(0);
     }
 
-    /**
-     * This method displays appointments within one week of the current date in the appointmentsTable TableView.
-     *
-     * @param event The By Week RadioButton is selected.
-     */
-    @FXML
-    public void onActionWeek(ActionEvent event) {
-        LocalDate dateNow = LocalDate.now();
-        //appointmentsTable.setItems(Appointments.selectWeek(dateNow));
-        appointmentsTable.setItems(appointments.selectWeek(dateNow));
-    }
 
     /**
      * This method changes the scene to the Reports scene.
@@ -249,19 +214,21 @@ public class AppointmentsInfoController implements Initializable {
         ReportsScene.buttonSwitchScene("/view/Reports.fxml", event);
     }
 
-
+    /**
+     * This method refreshes the table results. If filters are selected, the appointments displayed in the table must match the filter selections.
+     * Appointments may be filtered by date, venue, or both.
+     *
+     * @param actionEvent the refresh button is clicked
+     */
     public void onActionRefresh(ActionEvent actionEvent) {
         LocalDate dateNow = LocalDate.now();
-
 
         if (venueCombo.getSelectionModel().getSelectedItem() != null) {
             venueSelection = venueCombo.getSelectionModel().getSelectedItem();
         }
-
         if (dateCombo.getSelectionModel().getSelectedItem() != null) {
             dateSelection = dateCombo.getSelectionModel().getSelectedItem();
         }
-
         switch (dateSelection) {
             case "":
                 appointmentsTable.setItems(appointments.getAllAppointments());
@@ -295,9 +262,14 @@ public class AppointmentsInfoController implements Initializable {
         }
     }
 
+    /**
+     * This method filters the appointments displayed in the table based upon filter selections. Appointments may be filtered by
+     * date, venue, or both.
+     *
+     * @param actionEvent a date filter is selected
+     */
     public void onActionDateSelection(ActionEvent actionEvent) {
         LocalDate dateNow = LocalDate.now();
-
         dateSelection = dateCombo.getSelectionModel().getSelectedItem();
 
         switch (dateSelection) {
@@ -332,9 +304,14 @@ public class AppointmentsInfoController implements Initializable {
 
     }
 
+    /**
+     * This method filters the appointments displayed in the table based upon filter selections. Appointments may be filtered by
+     * date, venue, or both.
+     *
+     * @param actionEvent a venue filter is selected
+     */
     public void onActionVenueSelection(ActionEvent actionEvent) {
         venueSelection = venueCombo.getValue();
-
         LocalDate dateNow = LocalDate.now();
 
         switch (venueSelection) {
@@ -373,12 +350,17 @@ public class AppointmentsInfoController implements Initializable {
                     appointmentsTable.setItems(appointments.getAllAppointments());
                     break;
                 }
-
         }
-
-
     }
 
+    /**
+     * This method takes user input and searches for appointments that match that input. User input can be an appointment id or an appointment
+     * title. If there is an appointment with a matching id, that appointment is selected from the table.
+     * If there is an appointment or appointments with a matching title, only those appointments are shown in the table.
+     * If no results are found, "No results found" is displayed above the search field.
+     *
+     * @param actionEvent the search field receives input
+     */
     public void onActionSearchApptmt(ActionEvent actionEvent) {
         noResults.setText("");
 
@@ -388,8 +370,7 @@ public class AppointmentsInfoController implements Initializable {
 
             if (returnedApptmt != null) {
                 appointmentsTable.getSelectionModel().select(returnedApptmt);
-            }
-            else {
+            } else {
                 appointmentsTable.getSelectionModel().clearSelection();
                 noResults.setText("No results found");
             }
@@ -398,7 +379,7 @@ public class AppointmentsInfoController implements Initializable {
 
             appointmentsTable.setItems(Appointments.lookupAppointment(thisApptmtSearch));
 
-            if(!Appointments.resultsFound()) {
+            if (!Appointments.resultsFound()) {
                 noResults.setText("No results found");
             }
 
@@ -434,10 +415,4 @@ public class AppointmentsInfoController implements Initializable {
         refreshBtn.setGraphic(iv1);
     }
 
-
 }
-
-
-
-
-

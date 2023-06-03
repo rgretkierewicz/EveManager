@@ -81,20 +81,16 @@ public class AppointmentCancellationController implements Initializable {
 
         try {
             inputFile = new Scanner(file);
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-
         while (inputFile.hasNext()) {
-                item = inputFile.nextLine();
-                appointments.addCancellation(item);
+            item = inputFile.nextLine();
+            appointments.addCancellation(item);
         }
-
 
         listView.setItems(appointments.getAppointmentCancellations());
     }
-
 
 }

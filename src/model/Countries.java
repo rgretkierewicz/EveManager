@@ -3,7 +3,9 @@ package model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/** This class is used for creating and accessing data for countries. */
+/**
+ * This class is used for creating and accessing data for countries.
+ */
 public class Countries {
     private int id;
     private String name;
@@ -63,7 +65,5 @@ public class Countries {
     public String toString() {
         return name;
     }
-
-
 
 }

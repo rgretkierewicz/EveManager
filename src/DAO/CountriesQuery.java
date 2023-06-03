@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /** This class executes a query to the 'countries' table of the database.*/
 public class CountriesQuery {
 
-     /* This method queries the countries table to return all countries. The countries data
+     /** This method queries the countries table to return all countries. The countries data
      * returned is used to create matching Countries objects within the application.
      * @throws SQLException
      */

@@ -51,7 +51,6 @@ public class Contacts  {
         this.email = email;
     }
 
-
     /**
      * @return all contacts
      */
@@ -73,9 +72,6 @@ public class Contacts  {
     public String toString() {
         return "[" + contactId + "] " + contactName;
     }
-
-
-
 
 
 }

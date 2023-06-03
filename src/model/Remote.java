@@ -2,35 +2,16 @@ package model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /** This class is used for creating, modifying, and accessing data for remote appointments. */
 public class Remote extends Appointments{
     private static ObservableList<Appointments> allRemoteAppointments = FXCollections.observableArrayList();
-    private static ObservableList<String> appointmentCancellations = FXCollections.observableArrayList();
-    private int apptmtId;
-    private String title;
-    private String description;
-    private String location;
-    private String contactName;
-    private int contactId;
-    private String type;
-    private LocalDateTime start;
-    private LocalDateTime end;
-    private int custId;
-    private int userId;
-    String apptmtPlatform;
-    //Remote remote = new Remote();
-
     public Remote() {
     }
-    //String apptmtPlatform,
-
     public Remote(int apptmtId, String title, String description, String location, String contactName, int contactId, String type, LocalDateTime start, LocalDateTime end, int custId, int userId) {
         super(apptmtId, title, description, location, contactName, contactId, type, start, end, custId, userId);
-        //this.apptmtPlatform = apptmtPlatform;
     }
 
     /**
@@ -47,27 +28,31 @@ public class Remote extends Appointments{
         return allRemoteAppointments;
     }
 
+    /**
+     * @return all remote appointments list size
+     */
     public static int allAppointmentsLength() {
         return allRemoteAppointments.size();
     }
 
-
+    /**
+     * @param apptmtToDelete the remote appointment to be deleted
+     */
     public static void deleteAppointment(Remote apptmtToDelete) {
         allRemoteAppointments.remove(apptmtToDelete);
     }
 
     /**
-     * @param index the index of the appointment to update
-     * @param updatedApptmt the updated appointment
+     * @param index the index of the remote appointment to update
+     * @param updatedApptmt the updated remote appointment
      */
     public static void updateAppointment(int index, Remote updatedApptmt) {
         allRemoteAppointments.set(index, updatedApptmt);
     }
 
-
     /**
      * @param dateNow the current date
-     * @return a list of appointments within one month of the current date
+     * @return a list of remote appointments within one month of the current date
      */
     @Override
     public ObservableList<Appointments> selectMonth(LocalDate dateNow) {
@@ -85,7 +70,7 @@ public class Remote extends Appointments{
 
     /**
      * @param dateNow the current date
-     * @return a list of appointments within one week of the current date
+     * @return a list of remote appointments within one week of the current date
      */
     public  ObservableList<Appointments> selectWeek(LocalDate dateNow) {
         ObservableList<Appointments> weekApptmts = FXCollections.observableArrayList();
@@ -100,11 +85,10 @@ public class Remote extends Appointments{
         return weekApptmts;
     }
 
-
     /**
      * @param type the appointment type
      * @param month the appointment month
-     * @return the number of appointments matching that appointment type and month
+     * @return the number of remote appointments matching that appointment type and month
      */
     @Override
     public int returnApptmts(String type, int month) {
@@ -117,10 +101,9 @@ public class Remote extends Appointments{
         return apptmtCount;
     }
 
-
     /**
      * @param type the appointment type
-     * @return the number of appointments matching that appointment type
+     * @return the number of remote appointments matching that appointment type
      */
     @Override
     public int returnApptmts(String type) {
@@ -133,10 +116,9 @@ public class Remote extends Appointments{
         return apptmtCount;
     }
 
-
     /**
      * @param month the appointment month
-     * @return the number of appointments matching that appointment month
+     * @return the number of remote appointments matching that appointment month
      */
     @Override
     public int returnApptmts(int month) {
@@ -148,20 +130,6 @@ public class Remote extends Appointments{
             }
         }
         return apptmtCount;
-    }
-
-    /**
-     * @param cancellation data for the cancelled appointment
-     */
-    public void addCancellation(String cancellation) {
-        appointmentCancellations.add(cancellation);
-    }
-
-    /**
-     * @return all cancelled appointments
-     */
-    public ObservableList<String> getAppointmentCancellations() {
-        return appointmentCancellations;
     }
 
 }

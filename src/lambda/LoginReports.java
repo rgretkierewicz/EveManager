@@ -2,7 +2,6 @@ package lambda;
 
 import java.io.IOException;
 
-
 /**
  * This is the functional interface for the lambda
  *  expression that converts UTC time to local time.

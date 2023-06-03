@@ -19,7 +19,6 @@ import java.time.temporal.ChronoUnit;
 
 /** This class executes queries, updates, inserts, and deletes to the 'appointments' table of the database.*/
 public class AppointmentsQuery {
-    Appointments appointments = new Appointments();
 
     /**
      * This method queries the appointments table to return all appointments. The appointment data
@@ -66,12 +65,6 @@ public class AppointmentsQuery {
 
             LocalDateTime utcEnd = rs.getTimestamp("End").toLocalDateTime();
             LocalDateTime localTimeEnd = convert.utcToLocal(utcEnd );
-
-            /*
-            Appointments newAppointment = new Appointments(apptmtID, title, description, location, contactName, contactId, type, localTimeStart, localTimeEnd, custID, userID);
-            Appointments.addAppointment(newAppointment);
-
-             */
 
             if (venue.equals("In-Office")) {
                 InOffice newApptmt = new InOffice(apptmtID, title, description, location, contactName, contactId, type, localTimeStart, localTimeEnd, custID, userID);
@@ -285,6 +278,5 @@ public class AppointmentsQuery {
         }
 
     }
-
 
 }

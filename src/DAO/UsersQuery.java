@@ -14,8 +14,13 @@ import java.time.*;
  * This class executes queries to the 'users' table of the database.
  */
 public class UsersQuery {
-    LocalDateTime minUntilLogin;
 
+    /**
+     * @param userUsername the username to validate
+     * @param userPassword the password to validate
+     * @return username if login is validated, return null if login fails
+     * @throws SQLException
+     */
     public static String validateLogin(String userUsername, String userPassword) throws SQLException {
         String sql = "SELECT * FROM users WHERE User_Name = ? AND Password = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -47,6 +52,12 @@ public class UsersQuery {
 
     }
 
+    /**
+     * This method queries the users table to return all users. The user data
+     * returned is used to create matching Users objects within the application.
+     *
+     * @throws SQLException
+     */
     public static void userCreation() throws SQLException {
         String sql = "SELECT * FROM users";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -62,6 +73,11 @@ public class UsersQuery {
         }
     }
 
+    /**
+     * @param userUsername the username whose status is to be checked
+     * @return true if the account is locked, false if account is not locked
+     * @throws SQLException
+     */
     public static boolean accountStatus(String userUsername) throws SQLException {
         boolean locked = false;
 
@@ -97,12 +113,7 @@ public class UsersQuery {
                 ps.executeUpdate();
             }
         }
-
         return locked;
-
     }
-
-
-
 
 }

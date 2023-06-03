@@ -26,20 +26,17 @@ public class AppointmentReportsController implements Initializable {
     @FXML
     private Label numberLabel;
     String venueSelection;
-
     Appointments appointments = new Appointments();
-
     InOffice inOffice = new InOffice();
     Remote remote = new Remote();
-    private static ObservableList<String> types = FXCollections.observableArrayList(null,"Planning Session", "De-Briefing", "Intake", "Maintenance");
-
+    private static ObservableList<String> types = FXCollections.observableArrayList(null, "Planning Session", "De-Briefing", "Intake", "Maintenance");
     private static ObservableList<String> venueList = FXCollections.observableArrayList("All", "Remote", "In-Office");
-
-    private static ObservableList<Month> allMonths = FXCollections.observableArrayList(null ,Month.JANUARY, Month.FEBRUARY, Month.MARCH, Month.APRIL, Month.MAY, Month.JUNE, Month.JULY, Month.AUGUST,
-    Month.SEPTEMBER, Month.OCTOBER, Month.DECEMBER);;
+    private static ObservableList<Month> allMonths = FXCollections.observableArrayList(null, Month.JANUARY, Month.FEBRUARY, Month.MARCH, Month.APRIL, Month.MAY, Month.JUNE, Month.JULY, Month.AUGUST,
+            Month.SEPTEMBER, Month.OCTOBER, Month.DECEMBER);
 
     /**
      * This method changes the scene to the AppointmentsInfo scene.
+     *
      * @param event The Appointments Info button is clicked
      * @throws IOException
      */
@@ -51,6 +48,7 @@ public class AppointmentReportsController implements Initializable {
 
     /**
      * This method returns the application to the Reports scene.
+     *
      * @param event The back button is clicked.
      * @throws IOException
      */
@@ -62,6 +60,7 @@ public class AppointmentReportsController implements Initializable {
 
     /**
      * This method changes the scene to the CustomersInfo scene.
+     *
      * @param event The Customers Info button is clicked.
      * @throws IOException
      */
@@ -71,6 +70,12 @@ public class AppointmentReportsController implements Initializable {
         CustomersInfoScene.buttonSwitchScene("/view/CustomersInfo.fxml", event);
     }
 
+    /**
+     * This method changes the scene to the Reports scene.
+     *
+     * @param event The Reports button is clicked.
+     * @throws IOException
+     */
     public void onActionReports(ActionEvent event) throws IOException {
         SceneSwitcher ReportsScene = new SceneSwitcher();
         ReportsScene.buttonSwitchScene("/view/Reports.fxml", event);
@@ -79,10 +84,11 @@ public class AppointmentReportsController implements Initializable {
     /**
      * This method will return the number of appointments matching the specified criteria of
      * appointment month, appointment type, or both.
+     *
      * @param event The Generate Report button is clicked.
      */
     @FXML
-    public void onActionGenerateReport(ActionEvent event){
+    public void onActionGenerateReport(ActionEvent event) {
         String apptmtType = null;
         int apptmtMonth = 0;
 
@@ -114,8 +120,7 @@ public class AppointmentReportsController implements Initializable {
                 //Type selected, month is not
                 else if (apptmtMonth == 0 && apptmtType != null) {
                     numberLabel.setText(String.valueOf(appointments.returnApptmts(apptmtType)));
-                }
-                else {
+                } else {
                     numberLabel.setText(String.valueOf(Appointments.allAppointmentsLength()));
                 }
                 break;
@@ -132,8 +137,7 @@ public class AppointmentReportsController implements Initializable {
                 //Type selected, month is not
                 else if (apptmtMonth == 0 && apptmtType != null) {
                     numberLabel.setText(String.valueOf(inOffice.returnApptmts(apptmtType)));
-                }
-                else {
+                } else {
                     numberLabel.setText(String.valueOf(InOffice.allAppointmentsLength()));
 
                 }
@@ -152,19 +156,21 @@ public class AppointmentReportsController implements Initializable {
                 //Type selected, month is not
                 else if (apptmtMonth == 0 && apptmtType != null) {
                     numberLabel.setText(String.valueOf(remote.returnApptmts(apptmtType)));
-                }
-                else {
+                } else {
                     numberLabel.setText(String.valueOf(Remote.allAppointmentsLength()));
                 }
                 break;
         }
     }
 
-
+    /**
+     * This method sets the venueSelection string to match the ComboBox selection/
+     *
+     * @param actionEvent
+     */
     public void onActionVenueSelection(ActionEvent actionEvent) {
         venueSelection = venueCombo.getSelectionModel().getSelectedItem();
     }
-
 
     /**
      * This is the initialize method. This method will populate the appointment types, venue,

@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import model.Countries;
 import model.Divisions;
 import model.Users;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -40,7 +39,9 @@ public class AddCustomerController implements Initializable {
     private ComboBox<Users> usersCombo;
 
     /**
-     * This method returns the application to the CustomersInfo scene.
+     * This method will trigger an alert that requires the user to confirm that they would like to go back without saving.
+     * Upon confirmation, the user is returned to the application's CustomersInfo scene.
+     * If the user hits "Cancel", they will remain on the current scene.
      *
      * @param event The back button is clicked.
      * @throws IOException

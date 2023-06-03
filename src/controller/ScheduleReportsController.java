@@ -1,4 +1,3 @@
-
 package controller;
 
 import javafx.collections.FXCollections;
@@ -85,7 +84,6 @@ public class ScheduleReportsController implements Initializable {
         ReportsScene.buttonSwitchScene("/view/Reports.fxml", event);
     }
 
-
     /**
      * This method changes the scene to the AppointmentInfo scene.
      *
@@ -98,7 +96,6 @@ public class ScheduleReportsController implements Initializable {
         ReportsScene.buttonSwitchScene("/view/Reports.fxml", event);
 
     }
-
 
     /**
      * This method populates the divisions ComboBox based off of selected country.
@@ -116,9 +113,7 @@ public class ScheduleReportsController implements Initializable {
                 contactAppointments.add(apptmt);
             }
         }
-
         contactApptmtsTable.setItems(contactAppointments);
-
         appIdCol.setCellValueFactory(new PropertyValueFactory<>("apptmtId"));
         contactCol.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         custIdCol.setCellValueFactory(new PropertyValueFactory<>("custId"));
@@ -131,11 +126,12 @@ public class ScheduleReportsController implements Initializable {
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
 
-
+    /**
+     * This is the initialize method. This method will populate the contacts ComboBox.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         contactsCombo.setItems(Contacts.getAllContacts());
-
     }
 }
 

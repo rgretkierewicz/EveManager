@@ -10,7 +10,6 @@ public class Users {
     private String password;
     private static ObservableList<Users> allUsers = FXCollections.observableArrayList();
 
-
     public Users(int userId, String userName, String password) {
         this.userId = userId;
         this.userName = userName;
@@ -59,7 +58,5 @@ public class Users {
     public String toString() {
         return "[" + userId + "] " + userName;
     }
-
-
 
 }

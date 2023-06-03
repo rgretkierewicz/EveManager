@@ -9,8 +9,10 @@ import java.sql.SQLException;
 /** This class executes a query to the 'first_level_divisions' table of the database.*/
 public class DivisionsQuery {
 
-    /*This method queries the first_level_divisions table to return all divisions. The divisions data
-     * returned is used to create matching Divisions objects within the application.
+    /**
+     * This method queries the first_level_divisions table to return all divisions. The divisions data returned is
+     * used to create matching Divisions objects within the application.
+     *
      * @throws SQLException
      */
     public static void divisionsCreation() throws SQLException {
@@ -38,5 +40,6 @@ public class DivisionsQuery {
             }
         }
     }
+
 
 }

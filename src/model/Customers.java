@@ -161,6 +161,11 @@ public class Customers  {
         this.user = user;
     }
 
+    /**
+     *
+     * @param custId the customer id to be searched
+     * @return a customer with a matching id or null if no match was found
+     */
     public static Customers lookupCustomer(int custId) {
         for (Customers cust : allCustomers) {
             if (cust.getCustId() == custId) {
@@ -170,6 +175,11 @@ public class Customers  {
         return null;
     }
 
+    /**
+     * @param custName name to be searched
+     * @return a list of customers containing the name searched or a list of all customers if
+     * no match was found
+     */
     public static ObservableList<Customers> lookupCustomer(String custName) {
         if(!(filteredCustomers.isEmpty())) {
             filteredCustomers.clear();
@@ -190,6 +200,9 @@ public class Customers  {
         }
     }
 
+    /**
+     * @return true or false based on whether a search had a match
+     */
     public static boolean resultsFound() {
         return resultsFoundC;
     }

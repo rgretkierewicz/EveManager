@@ -13,6 +13,7 @@ public class ReportsController {
 
     /**
      * This method changes the scene to the AppointmentReports scene.
+     *
      * @param event The Appointment Reports button is clicked.
      * @throws IOException
      */
@@ -24,6 +25,7 @@ public class ReportsController {
 
     /**
      * This method changes the scene to the AppointmentInfo scene.
+     *
      * @param event The Appointments Info button is clicked.
      * @throws IOException
      */
@@ -35,6 +37,7 @@ public class ReportsController {
 
     /**
      * This method returns the application to the Reports scene.
+     *
      * @param event The Back button is clicked.
      * @throws IOException
      */
@@ -46,6 +49,7 @@ public class ReportsController {
 
     /**
      * This method changes the scene to the CustomersInfo scene.
+     *
      * @param event The Customers Info button is clicked.
      * @throws IOException
      */
@@ -57,6 +61,7 @@ public class ReportsController {
 
     /**
      * This method changes the scene to the ScheduleReports scene.
+     *
      * @param event The Contact Schedule Reports button is clicked.
      * @throws IOException
      */
@@ -68,6 +73,7 @@ public class ReportsController {
 
     /**
      * This method terminates the application.
+     *
      * @param event The exit button is clicked.
      */
     public void onActionExit(ActionEvent event) {

@@ -77,7 +77,6 @@ public class CustomersInfoController implements Initializable {
         ReportsScene.buttonSwitchScene("/view/Reports.fxml", event);
     }
 
-
     /**
      * This method takes in a selection from the appointmentsTable TableView and passes the selected appointment
      * to the UpdateAppointment scene. The scene is changed to the UpdateAppointment scene.
@@ -119,7 +118,6 @@ public class CustomersInfoController implements Initializable {
         AddCustomerScene.buttonSwitchScene("/view/AddCustomer.fxml", event);
     }
 
-
     /**
      * This method deletes a customer.
      *
@@ -141,12 +139,14 @@ public class CustomersInfoController implements Initializable {
 
         for (Appointments apptmt : Appointments.getAllAppointments()) {
             if (apptmt.getCustId() == customerForDelete.getCustId()) {
-                Alert customerDeleteError = new Alert(Alert.AlertType.ERROR);
-                customerDeleteError.setTitle("Customer Deletion Error");
-                customerDeleteError.setContentText("This customer has scheduled appointments. Please return to the appointments page to cancel the appointments associated with this customer and try again.");
-                customerDeleteError.showAndWait();
                 customerAppointments = true;
             }
+        }
+        if (customerAppointments == true) {
+            Alert customerDeleteError = new Alert(Alert.AlertType.ERROR);
+            customerDeleteError.setTitle("Customer Deletion Error");
+            customerDeleteError.setContentText("This customer has scheduled appointments. Please return to the appointments page to cancel the appointments associated with this customer and try again.");
+            customerDeleteError.showAndWait();
         }
 
         if (!customerAppointments) {
@@ -179,7 +179,14 @@ public class CustomersInfoController implements Initializable {
     }
 
 
-
+    /**
+     * This method takes user input and searches for customers that match that input. User input can be a customer id or a customer name.
+     * If there is a customer with a matching id, that customer is selected from the table.
+     * If there is a customer or customers with a matching name, only those customers are shown in the table.
+     * If no results are found, "No results found" is displayed above the search field.
+     *
+     * @param actionEvent the search field receives input
+     */
     public void onActionSearchCustomer(ActionEvent actionEvent) {
         noResults.setText("");
 
@@ -189,25 +196,22 @@ public class CustomersInfoController implements Initializable {
 
             if (returnedCust != null) {
                 customersTable.getSelectionModel().select(returnedCust);
-            }
-            else {
+            } else {
                 customersTable.getSelectionModel().clearSelection();
                 noResults.setText("No results found");
             }
 
-        }
-        catch (NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             String thisCustSearch = customerSearch.getText();
 
             customersTable.setItems(Customers.lookupCustomer(thisCustSearch));
 
-            if(!Customers.resultsFound()) {
+            if (!Customers.resultsFound()) {
                 noResults.setText("No results found");
             }
 
         }
     }
-
 
     /**
      * This is the initialize method.
@@ -224,6 +228,5 @@ public class CustomersInfoController implements Initializable {
         countryCol.setCellValueFactory(new PropertyValueFactory<>("country"));
         fldCol.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
     }
-
 
 }

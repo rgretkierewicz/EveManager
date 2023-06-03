@@ -9,14 +9,15 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import model.*;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-/** This class takes in entered data and updates an existing customer. */
+/**
+ * This class takes in entered data and updates an existing customer.
+ */
 public class UpdateCustomerController implements Initializable {
     @FXML
     private TextField addressTxt;
@@ -36,7 +37,10 @@ public class UpdateCustomerController implements Initializable {
     private ComboBox<Users> usersCombo;
 
     /**
-     * This method returns the application to the CustomersInfo scene.
+     * This method will trigger an alert that requires the user to confirm that they would like to go back without saving.
+     * Upon confirmation, the user is returned to the application's CustomersInfo scene.
+     * If the user hits "Cancel", they will remain on the current scene.
+     *
      * @param event The back button is clicked.
      * @throws IOException
      */
@@ -59,12 +63,13 @@ public class UpdateCustomerController implements Initializable {
      * This method updates the customer with the entered data.
      * After update is executed, an update successful or update failed alert will be displayed.
      * The application then returns to the CustomersInfo scene.
+     *
      * @param event The save button is clicked.
      * @throws SQLException
      * @throws IOException
      */
     @FXML
-    public void onActionSaveCustomer (ActionEvent event) throws SQLException, IOException {
+    public void onActionSaveCustomer(ActionEvent event) throws SQLException, IOException {
         try {
             int custId = Integer.parseInt(custIdTxt.getText());
             String custName = nameTxt.getText();
@@ -81,9 +86,7 @@ public class UpdateCustomerController implements Initializable {
                 updateSuccess.setTitle("Update Success");
                 updateSuccess.setContentText("Customer update successful.");
                 updateSuccess.showAndWait();
-            }
-            
-            else {
+            } else {
                 Alert updateFailed = new Alert(Alert.AlertType.INFORMATION);
                 updateFailed.setTitle("Update Failed");
                 updateFailed.setContentText("Customer update has failed.");
@@ -92,9 +95,7 @@ public class UpdateCustomerController implements Initializable {
 
             SceneSwitcher CustomersInfoScene = new SceneSwitcher();
             CustomersInfoScene.buttonSwitchScene("/view/CustomersInfo.fxml", event);
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             Alert invalidInputError = new Alert(Alert.AlertType.ERROR);
             invalidInputError.setTitle("Invalid Input Error");
             invalidInputError.setContentText("Please enter a valid value for each field.");
@@ -104,20 +105,17 @@ public class UpdateCustomerController implements Initializable {
 
     /**
      * This method populates the divisions ComboBox based off of selected country.
+     *
      * @param event A country is selected from the country ComboBox.
      */
     @FXML
-    public void onActionCountrySelection (ActionEvent event) {
+    public void onActionCountrySelection(ActionEvent event) {
         if (countryCombo.getSelectionModel().getSelectedItem().getId() == 1) {
-                divisionCombo.setItems(Divisions.getUsDivisions());
-        }
-
-        else if (countryCombo.getSelectionModel().getSelectedItem().getId() == 2) {
-                divisionCombo.setItems(Divisions.getUkDivisions());
-        }
-
-        else if (countryCombo.getSelectionModel().getSelectedItem().getId() == 3) {
-                divisionCombo.setItems(Divisions.getCanadaDivisions());
+            divisionCombo.setItems(Divisions.getUsDivisions());
+        } else if (countryCombo.getSelectionModel().getSelectedItem().getId() == 2) {
+            divisionCombo.setItems(Divisions.getUkDivisions());
+        } else if (countryCombo.getSelectionModel().getSelectedItem().getId() == 3) {
+            divisionCombo.setItems(Divisions.getCanadaDivisions());
         }
     }
 
@@ -125,6 +123,7 @@ public class UpdateCustomerController implements Initializable {
     /**
      * This method receives the customer selected in the CustomersInfo scene and populates the UpdateCustomer
      * fields with the customer's current values.
+     *
      * @param customer The customer to be updated.
      */
     public void sendCustomer(Customers customer) {
@@ -144,13 +143,9 @@ public class UpdateCustomerController implements Initializable {
 
                 if (countryId == 1) {
                     divisionCombo.setItems(Divisions.getUsDivisions());
-                }
-
-                else if (countryId == 2) {
+                } else if (countryId == 2) {
                     divisionCombo.setItems(Divisions.getUkDivisions());
-                }
-
-                else if (countryId == 3) {
+                } else if (countryId == 3) {
                     divisionCombo.setItems(Divisions.getCanadaDivisions());
                 }
 

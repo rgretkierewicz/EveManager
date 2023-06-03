@@ -6,30 +6,17 @@ import javafx.collections.ObservableList;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/** This class is used for creating, modifying, and accessing data for in-office appointments. */
-public class InOffice extends Appointments{
+/**
+ * This class is used for creating, modifying, and accessing data for in-office appointments.
+ */
+public class InOffice extends Appointments {
     private static ObservableList<Appointments> allInOfficeAppointments = FXCollections.observableArrayList();
 
-    /*
-    private int apptmtId;
-    private String title;
-    private String description;
-    private String location;
-    private String contactName;
-    private int contactId;
-    private String type;
-    private LocalDateTime start;
-    private LocalDateTime end;
-    private int custId;
-    private int userId;
-
-     */
+    public InOffice() {
+    }
 
     public InOffice(int apptmtId, String title, String description, String location, String contactName, int contactId, String type, LocalDateTime start, LocalDateTime end, int custId, int userId) {
         super(apptmtId, title, description, location, contactName, contactId, type, start, end, custId, userId);
-    }
-
-    public InOffice() {
     }
 
     /**
@@ -39,7 +26,6 @@ public class InOffice extends Appointments{
         allInOfficeAppointments.add(newAppointment);
     }
 
-
     /**
      * @return all in-office appointments
      */
@@ -47,21 +33,23 @@ public class InOffice extends Appointments{
         return allInOfficeAppointments;
     }
 
+    /**
+     * @return all in-office appointments list size
+     */
     public static int allAppointmentsLength() {
         return allInOfficeAppointments.size();
     }
 
-
     /**
-     * @param apptmtToDelete the appointment to delete
+     * @param apptmtToDelete the in-office appointment to delete
      */
     public static void deleteAppointment(InOffice apptmtToDelete) {
         allInOfficeAppointments.remove(apptmtToDelete);
     }
 
     /**
-     * @param index the index of the appointment to update
-     * @param updatedApptmt the updated appointment
+     * @param index         the index of the in-office  appointment to update
+     * @param updatedApptmt the updated in-office appointment
      */
     public static void updateAppointment(int index, InOffice updatedApptmt) {
         allInOfficeAppointments.set(index, updatedApptmt);
@@ -69,7 +57,7 @@ public class InOffice extends Appointments{
 
     /**
      * @param dateNow the current date
-     * @return a list of appointments within one month of the current date
+     * @return a list of in-office appointments within one month of the current date
      */
     @Override
     public ObservableList<Appointments> selectMonth(LocalDate dateNow) {
@@ -87,7 +75,7 @@ public class InOffice extends Appointments{
 
     /**
      * @param dateNow the current date
-     * @return a list of appointments within one week of the current date
+     * @return a list of in-office appointments within one week of the current date
      */
     @Override
     public ObservableList<Appointments> selectWeek(LocalDate dateNow) {
@@ -103,12 +91,10 @@ public class InOffice extends Appointments{
         return weekApptmts;
     }
 
-
-
     /**
-     * @param type the appointment type
+     * @param type  the appointment type
      * @param month the appointment month
-     * @return the number of appointments matching that appointment type and month
+     * @return the number of in-office appointments matching that appointment type and month
      */
     @Override
     public int returnApptmts(String type, int month) {
@@ -123,10 +109,9 @@ public class InOffice extends Appointments{
         return apptmtCount;
     }
 
-
     /**
      * @param type the appointment type
-     * @return the number of appointments matching that appointment type
+     * @return the number of in-office appointments matching that appointment type
      */
     @Override
     public int returnApptmts(String type) {
@@ -139,10 +124,9 @@ public class InOffice extends Appointments{
         return apptmtCount;
     }
 
-
     /**
      * @param month the appointment month
-     * @return the number of appointments matching that appointment month
+     * @return the number of in-office appointments matching that appointment month
      */
     @Override
     public int returnApptmts(int month) {
@@ -155,7 +139,5 @@ public class InOffice extends Appointments{
         }
         return apptmtCount;
     }
-
-
 
 }

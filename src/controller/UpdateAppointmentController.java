@@ -49,7 +49,6 @@ public class UpdateAppointmentController implements Initializable {
     private ComboBox<Users> usersCombo;
     DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-
     /**
      * This method receives the appointment selected in the AppointmentsInfo scene and populates the UpdateAppointment
      * fields with the appointment's current values.
@@ -95,16 +94,18 @@ public class UpdateAppointmentController implements Initializable {
             remoteRBtn.setSelected(true);
 
         }
-        if (appointment instanceof  InOffice) {
+        if (appointment instanceof InOffice) {
             inOfficeRBtn.setSelected(true);
         }
     }
 
-
     /**
-     * This method returns the application to the AppointmentsInfo scene.
+     * This method will trigger an alert that requires the user to confirm that they would like to go back without saving.
+     * Upon confirmation, the user is returned to the application's AppointmentsInfo scene.
+     * If the user hits "Cancel", they will remain on the current scene.
      *
-     * @param event The back button is clicked.
+     * @param event The Back button is clicked.
+     * @throws IOException
      */
     @FXML
     public void onActionBack(ActionEvent event) throws IOException {
@@ -118,10 +119,7 @@ public class UpdateAppointmentController implements Initializable {
             SceneSwitcher AppointmentScene = new SceneSwitcher();
             AppointmentScene.buttonSwitchScene("/view/AppointmentsInfo.fxml", event);
         }
-
-
     }
-
 
     /**
      * This method updates the appointment with the entered data.
@@ -143,7 +141,6 @@ public class UpdateAppointmentController implements Initializable {
             String user = usersCombo.getValue().getUserName();
             int userId = usersCombo.getValue().getUserId();
             int custId = customersCombo.getValue().getCustId();
-
 
             String venue = null;
 
@@ -188,17 +185,14 @@ public class UpdateAppointmentController implements Initializable {
                 SceneSwitcher AppointmentsScene = new SceneSwitcher();
                 AppointmentsScene.buttonSwitchScene("/view/AppointmentsInfo.fxml", event);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Alert invalidInputError = new Alert(Alert.AlertType.ERROR);
             invalidInputError.setTitle("Invalid Input Error");
             invalidInputError.setContentText("Please enter a valid value for each field.");
             invalidInputError.showAndWait();
-
             e.printStackTrace();
         }
     }
-
 
     /**
      * This is the initialize method.
@@ -216,6 +210,5 @@ public class UpdateAppointmentController implements Initializable {
         startCombo.setItems(Times.getBusinessHours());
         endCombo.setItems(Times.getBusinessHoursEnd());
     }
-
 
 }

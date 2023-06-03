@@ -61,10 +61,12 @@ public class LoginFormController implements Initializable {
         System.exit(0);
     }
 
-
     /**
      * This method validates a username and password.
-     * If credentials are valid, the user is navigated to the Home scene and
+     * The first thing that will be checked is if the account is logged out due to too many failed login attempts.
+     * If the account is locked an alert will be displayed notifying the user of the account status.
+     * <p>
+     * If the account is unlocked and the credentials are valid, the user is navigated to the Appointments Info scene and
      * an alert will be displayed notifying the user if there are any upcoming appointments.
      * If credentials are invalid, an error message is displayed.
      * <p>
@@ -95,7 +97,7 @@ public class LoginFormController implements Initializable {
 
             //LAMBDA
             LoginReports report = (loginTxt) -> {
-                String fileName =  "src/login_activity.txt";
+                String fileName = "src/login_activity.txt";
                 FileWriter fileWriter = new FileWriter(fileName, true);
                 PrintWriter outputFile = new PrintWriter(fileWriter);
 
@@ -124,7 +126,6 @@ public class LoginFormController implements Initializable {
 
                 login = "Successful login by the user: " + userUsername + " at ";
                 report.addLoginReport(login);
-
 
                 try {
                     AppointmentsQuery.upcomingApptmts();
@@ -156,7 +157,6 @@ public class LoginFormController implements Initializable {
             locLbl.setText(rb.getString("Location"));
         }
         userLocLbl.setText(String.valueOf(localZoneId));
-
     }
 
 }

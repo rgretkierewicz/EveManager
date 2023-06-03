@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import model.*;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -50,7 +49,9 @@ public class AddAppointmentController implements Initializable {
     DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
-     * This method returns the application to the AppointmentsInfo scene.
+     * This method will trigger an alert that requires the user to confirm that they would like to go back without saving.
+     * Upon confirmation, the user is returned to the application's AppointmentsInfo scene.
+     * If the user hits "Cancel", they will remain on the current scene.
      *
      * @param event The Back button is clicked.
      * @throws IOException
@@ -100,7 +101,6 @@ public class AddAppointmentController implements Initializable {
                 venue = "In-Office";
             }
 
-
             LocalDate apptmtDate = datePicker.getValue();
             LocalTime startTime = startCombo.getValue();
             LocalTime endTime = endCombo.getValue();
@@ -115,34 +115,20 @@ public class AddAppointmentController implements Initializable {
                 apptmtOverlap.setTitle("Appointment Overlap");
                 apptmtOverlap.setContentText("This appointment overlaps with an appointment beginning at " + dateFormat.format(overlapApptmt) + ". Please select another appointment time and try again.");
                 apptmtOverlap.showAndWait();
-            }
-            else {
+            } else {
                 AppointmentsQuery.insert(title, desc, loc, contactId, contactName, type, start, end, user, custId, userId, venue);
 
                 SceneSwitcher AppointmentsScene = new SceneSwitcher();
                 AppointmentsScene.buttonSwitchScene("/view/AppointmentsInfo.fxml", event);
             }
-        }
-
-        /*
-        catch (NullPointerException e) {
+        } catch (Exception e) {
             Alert invalidInputError = new Alert(Alert.AlertType.ERROR);
             invalidInputError.setTitle("Invalid Input Error");
             invalidInputError.setContentText("Please enter a valid value for each field.");
             invalidInputError.showAndWait();
         }
-
-         */
-        catch (Exception e) {
-            Alert invalidInputError = new Alert(Alert.AlertType.ERROR);
-            invalidInputError.setTitle("Invalid Input Error");
-            invalidInputError.setContentText("Please enter a valid value for each field.");
-            invalidInputError.showAndWait();
-        }
-
 
     }
-
 
     /**
      * This is the initialize method.
@@ -155,7 +141,6 @@ public class AddAppointmentController implements Initializable {
         contactsCombo.setItems(Contacts.getAllContacts());
         usersCombo.setItems(Users.getAllUsers());
         customersCombo.setItems(Customers.getAllCustomers());
-
         Times.prepareBusinessHours();
         startCombo.setItems(Times.getBusinessHours());
         endCombo.setItems(Times.getBusinessHoursEnd());

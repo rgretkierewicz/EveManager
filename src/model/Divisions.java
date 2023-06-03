@@ -3,7 +3,9 @@ package model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/** This class is used for creating and accessing data for divisions. */
+/**
+ * This class is used for creating and accessing data for divisions.
+ */
 public class Divisions {
     private static ObservableList<Divisions> usDivisions = FXCollections.observableArrayList();
     private static ObservableList<Divisions> ukDivisions = FXCollections.observableArrayList();
@@ -53,7 +55,6 @@ public class Divisions {
         usDivisions.add(addDivision);
     }
 
-
     /**
      * @param addDivision the division to add to the Canada divisions
      */
@@ -96,9 +97,8 @@ public class Divisions {
         return countryId;
     }
 
-
     /**
-     * @param customer the customer to find the division id of
+     * @param customer  the customer to find the division id of
      * @param countryId the country id of the customer
      * @return the division of the customer
      */
@@ -110,7 +110,6 @@ public class Divisions {
                 }
             }
         }
-
         if (countryId == 2) {
             for (Divisions division : Divisions.getUkDivisions()) {
                 if (division.getDivisionId() == customer.getDivisionId()) {
@@ -118,7 +117,6 @@ public class Divisions {
                 }
             }
         }
-
         if (countryId == 3) {
             for (Divisions division : Divisions.getCanadaDivisions()) {
                 if (division.getDivisionId() == customer.getDivisionId()) {
@@ -129,7 +127,6 @@ public class Divisions {
         return null;
     }
 
-
     /**
      * @return the division name
      */
@@ -137,6 +134,5 @@ public class Divisions {
     public String toString() {
         return divisionName;
     }
-
 
 }

@@ -6,7 +6,9 @@ import javafx.collections.ObservableList;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/** This class is used for creating, modifying, and accessing data for appointments. */
+/**
+ * This class is used for creating, modifying, and accessing data for appointments.
+ */
 public class Appointments {
     private static ObservableList<Appointments> allAppointments = FXCollections.observableArrayList();
     private static ObservableList<String> appointmentCancellations = FXCollections.observableArrayList();
@@ -24,8 +26,7 @@ public class Appointments {
     private int userId;
     static boolean resultsFoundA = true;
 
-
-    public Appointments () {
+    public Appointments() {
     }
 
     public Appointments(int apptmtId, String title, String description, String location, String contactName, int contactId, String type, LocalDateTime start, LocalDateTime end, int custId, int userId) {
@@ -56,10 +57,12 @@ public class Appointments {
         return allAppointments;
     }
 
+    /**
+     * @return all appointments list size
+     */
     public static int allAppointmentsLength() {
         return allAppointments.size();
     }
-
 
     /**
      * @return the description
@@ -202,6 +205,10 @@ public class Appointments {
         allAppointments.set(index, updatedApptmt);
     }
 
+    /**
+     * @param apptmtId appointment id to be searched
+     * @return an appointment with a matching id or null if no match was found
+     */
     public static Appointments lookupAppointment(int apptmtId) {
         for (Appointments apptmt : allAppointments) {
             if (apptmt.getApptmtId() == apptmtId) {
@@ -211,8 +218,13 @@ public class Appointments {
         return null;
     }
 
+    /**
+     * @param apptmtTitle title to be searched
+     * @return a list of appointments containing the appointment title searched or a list of all appointments if
+     * no match was found
+     */
     public static ObservableList<Appointments> lookupAppointment(String apptmtTitle) {
-        if(!(filteredAppointments.isEmpty())) {
+        if (!(filteredAppointments.isEmpty())) {
             filteredAppointments.clear();
         }
 
@@ -224,17 +236,18 @@ public class Appointments {
         if (filteredAppointments.isEmpty()) {
             resultsFoundA = false;
             return allAppointments;
-        }
-        else {
+        } else {
             resultsFoundA = true;
             return filteredAppointments;
         }
     }
 
+    /**
+     * @return true or false based on whether a search had a match
+     */
     public static boolean resultsFound() {
         return resultsFoundA;
     }
-
 
     /**
      * @param dateNow the current date
@@ -272,21 +285,19 @@ public class Appointments {
 
     /**
      * @param apptmtStart the appointment's start
-     * @param apptmtEnd the appointment's end
+     * @param apptmtEnd   the appointment's end
      * @return the start time of the appointment that overlaps or null if no appointment overlaps
      */
     public static LocalDateTime overlap(LocalDateTime apptmtStart, LocalDateTime apptmtEnd) {
         for (Appointments apptmt : allAppointments) {
             LocalDateTime currStart = apptmt.getStart();
-            LocalDateTime currEnd =  apptmt.getEnd();
+            LocalDateTime currEnd = apptmt.getEnd();
 
             if ((apptmtStart.isAfter(currStart) || apptmtStart.isEqual(currStart)) && apptmtStart.isBefore(currEnd)) {
                 return currStart;
-            }
-            else if (apptmtEnd.isAfter(currStart) && (apptmtEnd.isBefore(currEnd) || apptmtEnd.isEqual(currEnd))) {
+            } else if (apptmtEnd.isAfter(currStart) && (apptmtEnd.isBefore(currEnd) || apptmtEnd.isEqual(currEnd))) {
                 return currStart;
-            }
-            else if ((apptmtStart.isBefore(currStart) || apptmtStart.isEqual(currStart)) && (apptmtEnd.isAfter(currEnd)) || apptmtEnd.isEqual(currEnd)) {
+            } else if ((apptmtStart.isBefore(currStart) || apptmtStart.isEqual(currStart)) && (apptmtEnd.isAfter(currEnd)) || apptmtEnd.isEqual(currEnd)) {
                 return currStart;
             }
         }
@@ -295,30 +306,24 @@ public class Appointments {
 
     /**
      * @param apptmtStart the appointment's start
-     * @param apptmtEnd the appointment's end
-     * @param apptmtId the appointment's id
+     * @param apptmtEnd   the appointment's end
+     * @param apptmtId    the appointment's id
      * @return the start time of the appointment that overlaps or null if no appointment overlaps
      */
     public static LocalDateTime overlap(LocalDateTime apptmtStart, LocalDateTime apptmtEnd, int apptmtId) {
         for (Appointments apptmt : allAppointments) {
             LocalDateTime currStart = apptmt.getStart();
-            LocalDateTime currEnd =  apptmt.getEnd();
+            LocalDateTime currEnd = apptmt.getEnd();
 
-            if (apptmt.getApptmtId()!= apptmtId) {
+            if (apptmt.getApptmtId() != apptmtId) {
                 if ((apptmtStart.isAfter(currStart) || apptmtStart.isEqual(currStart)) && apptmtStart.isBefore(currEnd)) {
                     return currStart;
-                }
-
-                else if (apptmtEnd.isAfter(currStart) && (apptmtEnd.isBefore(currEnd) || apptmtEnd.isEqual(currEnd))) {
+                } else if (apptmtEnd.isAfter(currStart) && (apptmtEnd.isBefore(currEnd) || apptmtEnd.isEqual(currEnd))) {
+                    return currStart;
+                } else if ((apptmtStart.isBefore(currStart) || apptmtStart.isEqual(currStart)) && (apptmtEnd.isAfter(currEnd)) || apptmtEnd.isEqual(currEnd)) {
                     return currStart;
                 }
-
-                else if ((apptmtStart.isBefore(currStart) || apptmtStart.isEqual(currStart)) && (apptmtEnd.isAfter(currEnd)) || apptmtEnd.isEqual(currEnd)) {
-                    return currStart;
-                }
-            }
-
-            else {
+            } else {
                 continue;
             }
         }
@@ -326,7 +331,7 @@ public class Appointments {
     }
 
     /**
-     * @param type the appointment type
+     * @param type  the appointment type
      * @param month the appointment month
      * @return the number of appointments matching that appointment type and month
      */
@@ -339,7 +344,6 @@ public class Appointments {
         }
         return apptmtCount;
     }
-
 
     /**
      * @param type the appointment type
@@ -354,7 +358,6 @@ public class Appointments {
         }
         return apptmtCount;
     }
-
 
     /**
      * @param month the appointment month
@@ -371,10 +374,6 @@ public class Appointments {
         return apptmtCount;
     }
 
-    public static int apptmtsLength() {
-        return allAppointments.size();
-    }
-
     /**
      * @param cancellation data for the cancelled appointment
      */
@@ -389,11 +388,13 @@ public class Appointments {
         return appointmentCancellations;
     }
 
+    /**
+     * @return appointment id, title, and description
+     */
     @Override
     public String toString() {
         return this.getApptmtId() + " " + this.getTitle() + "- " + this.getDescription() + ".";
     }
-
 
 
 }
