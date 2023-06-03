@@ -1,0 +1,6 @@
+In order to setup the MySQL database for the application, you will need to run the attached script titled "CreateDB".
+
+Set up steps:
+1. Open MySQL WorkBench 8.0
+2. Create a new schema -> Name: "client_schedule" -> Apply default -> Apply -> Finish
+3. File -> Open SQL Script -> CreateDB -> Execute
